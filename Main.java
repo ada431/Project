@@ -51,26 +51,95 @@ public class Main {
         }
         return sum;
     }
-
-
-
-
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        int cIndex = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(commodity)) {
+                cIndex = i;
+                break;
+            }
+        }
+
+        if (cIndex == -1) return -99999;
+        if (from < 1 || from > DAYS || to < 1 || to > DAYS || from > to) return -99999;
+
+        int total = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = from - 1; d <= to - 1; d++) {
+                total += profits[m][d][cIndex];
+            }
+        }
+        return total;
     }
 
     public static int bestDayOfMonth(int month) {
-        return 1234;
+        if (month < 0 || month >= MONTHS) return -1;
+
+        int bestDay = 1;
+        int bestTotal = Integer.MIN_VALUE;
+
+        for (int day = 1; day <= DAYS; day++) {
+            int sum = totalProfitOnDay(month, day);
+            if (sum > bestTotal) {
+                bestTotal = sum;
+                bestDay = day;
+            }
+        }
+        return bestDay;
     }
 
     public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
-    }
 
+        int cIndex = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(comm)) {
+                cIndex = i;
+                break;
+            }
+        }
+        if (cIndex == -1) return "INVALID_COMMODITY";
+
+        int bestMonth = 0;
+        int bestTotal = Integer.MIN_VALUE;
+
+        for (int m = 0; m < MONTHS; m++) {
+            int total = 0;
+            for (int d = 0; d < DAYS; d++) {
+                total += profits[m][d][cIndex];
+            }
+            if (total > bestTotal) {
+                bestTotal = total;
+                bestMonth = m;
+            }
+        }
+        return months[bestMonth];
+    }
     public static int consecutiveLossDays(String comm) {
-        return 1234;
-    }
 
+        int cIndex = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(comm)) {
+                cIndex = i;
+                break;
+            }
+        }
+        if (cIndex == -1) return -1;
+
+        int best = 0;
+        int current = 0;
+
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 0; d < DAYS; d++) {
+                if (profits[m][d][cIndex] < 0) {
+                    current++;
+                    if (current > best) best = current;
+                } else {
+                    current = 0;
+                }
+            }
+        }
+        return best;
+    }
     public static int daysAboveThreshold(String comm, int threshold) {
         return 1234;
     }
