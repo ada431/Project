@@ -277,8 +277,7 @@ public class Main {
 
     public static void main(String[] args) {
         loadData(); System.out.println("Loaded = " + loaded);
-        System.out.println("Day 1 January total = " + totalProfitOnDay(0, 1));
-        System.out.println("Best week January = " + bestWeekOfMonth(0));
-        System.out.println("Data loaded – ready for queries");
+       
     }
+
 }
