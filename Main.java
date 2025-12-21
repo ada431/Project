@@ -22,7 +22,7 @@ public class Main {
                 File file = new File(months[m] + ".txt");
                 Scanner sc = new Scanner(file);
 
-                // başlık satırını atla: Day,Commodity,Profit
+                
                 sc.nextLine();
 
                 while (sc.hasNextLine()) {
@@ -276,8 +276,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        loadData(); System.out.println("Loaded = " + loaded);
+        loadData();
        
     }
 
 }
+
